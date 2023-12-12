@@ -27,3 +27,39 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'You have been Logged Out...')
     return redirect('home')
+
+
+def student_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'student_page.html', {})
+    else:
+        messages.success(request, 'Please log in first')
+        return redirect('home')
+
+def courses_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'courses_page.html', {})
+    else:
+        messages.success(request, 'Please log in first')
+        return redirect('home')
+
+def schemes_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'schemes_page.html', {})
+    else:
+        messages.success(request, 'Please log in first')
+        return redirect("home")
+
+def state_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'state_page.html', {})
+    else:
+        messages.success(request, 'Please log in first')
+        return redirect("home")
+
+def college_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'college_page.html', {})
+    else:
+        messages.success(request, 'Please log in first')
+        return redirect("home")

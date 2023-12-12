@@ -3,8 +3,15 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+        <div class="col-ms-6 mx-auto "  style="text-align: center;">
+        <h1>this is dashboard </h1>
+        <a href="{% url 'student_page'%}" class ="btn btn-dark" >student records</a>
+        <a href="{% url 'courses_page'%}" class ="btn btn-dark" >Courses</a>
+        <a href="{% url 'schemes_page'%}" class ="btn btn-dark" >Schemes</a>
+        <a href="{% url 'state_page'%}"  class ="btn btn-dark">states </a>
+        <a href="{% url 'college_page'%}" class ="btn btn-dark" >colleges</a>
+        </div>
 
-        <h1 class="text-center">hello user</h1>
 
 
     {% else %}
