@@ -1,9 +1,38 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <div class="col-ms-6 mx-auto "  style="text-align: center;">
-        <h1> records of state </h1>
+    {% if user.is_authenticated %}
+    <h1 class="text-center">Scheme</h1>
+        </div>
+    {% if scheme_records %}
 
-    <a href = "{% url 'home' %} " class ="btn btn-dark " >Back</a>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Scheme ID</th>
+                <th scope="col">Scheme Name</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for record in scheme_records %}
+            <tr>
+                <td>{{record.id}}</td>
+                <td>{{record.name}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+    <div class="col-ms-6 mx-auto "  style="text-align: center;">
+    {% else %}
+
+    <h1 class="text-center">Please log in to continue</h1>
+
+    {% endif %}
+    <a href = "{% url 'home' %} " class ="btn btn-primary " >Go Back</a>
+    <a href = "{% url 'add_scheme' %} " class ="btn btn-primary " >Add Scheme</a>
     </div>
-
 {% endblock %}

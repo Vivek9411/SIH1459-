@@ -1,9 +1,51 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <div class="col-ms-6 mx-auto "  style="text-align: center;">
-        <h1> records of Colleges </h1>
+    {% if user.is_authenticated %}
+    <h1 class="text-center">College</h1>
+        </div>
+    {% if college_records %}
 
-    <a href = "{% url 'home' %} " class ="btn btn-dark " >Back</a>
-    </div>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">College Name</th>
+                <th scope="col">College Code</th>
+                <th scope="col">College State</th>
+                <th scope="col">College City</th>
+                <th scope="col">College Pincode</th>
+                <th scope="col">College Address</th>
+                <th scope="col">College Phone</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for record in college_records %}
+            <tr>
+                <td>{{record.name}}</td>
+                <td>{{record.code}}</td>
+                <td>{{record.state}}</td>
+                <td>{{record.city}}</td>
+                <td>{{record.pincode}}</td>
+                <td>{{record.address}}</td>
+                <td>{{record.phone}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+
+
+    <div class="col-ms-6 mx-auto "  style="text-align: center;">
+    {% else %}
+
+        <h1 class="text-center">Please log in to continue</h1>
+    {% endif %}
+        <a href = "{% url 'home' %} " class ="btn btn-primary " >Go Back</a>
+
+        </div>
+
 
 {% endblock %}
