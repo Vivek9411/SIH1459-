@@ -17,10 +17,10 @@
         </thead>
         <tbody class="table-group-divider">
             {% for record in course_records %}
-            <tr>
-                <td>{{record.name}}</td>
-                <td>{{record.code}}</td>
-                <td>{{record.duration}}</td>
+                <tr>
+                    <td>{{record.code}}</td>
+                    <td>{{record.name}}</td>
+                    <td>{{record.duration}}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -38,4 +38,13 @@
     <a href = "{% url 'home' %} " class ="btn btn-primary " >Go Back</a>
     <a href = "{% url 'add_course' %} " class ="btn btn-primary " >Add Course</a>
     </div>
+
+
+    <form class="d-flex" method="POST" action="{% url 'courses_search' %}">
+        {% csrf_token %}
+        
+        <input class="form-control me-2" type="search" placeholder="Search by course name or course id " aria-label="Search" name="courses_search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
 {% endblock %}

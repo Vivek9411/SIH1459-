@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import State, Scheme, Course, College
-from .forms import AddSchemeForm, AddCourseForm
+from .forms import AddSchemeForm, AddCourseForm, AddCollegeForm
 
 
 # Create your views here.
@@ -39,6 +39,8 @@ def student_page(request):
         return redirect('home')
 
 
+
+
 def courses_page(request):
     course_records = Course.objects.all()
     if request.user.is_authenticated:
@@ -48,6 +50,29 @@ def courses_page(request):
         return redirect('home')
 
 
+def courses_search(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            searched_for = request.POST.get('courses_search')
+            if searched_for.isnumeric():
+                result_search = Course.objects.raw(f"SELECT * FROM website_course WHERE code= {searched_for}")
+                return render(request, 'courses_search.html', {'result_search': result_search})
+            elif isinstance(searched_for, str):
+                searched_for = searched_for.lower()
+                result_search = Course.objects.raw(f"SELECT * FROM website_course WHERE name ='{searched_for}' ")
+                return render(request, 'courses_search.html', {'result_search': result_search})
+            else:
+                messages.success(request, 'Please enter a valid scheme id')
+                return redirect('courses_page')
+        else:
+            return redirect('courses_page')
+    else:
+        messages.success(request, 'You must be logged in ')
+        return redirect('home')
+
+
+
+
 def schemes_page(request):
     scheme_records = Scheme.objects.all()
     if request.user.is_authenticated:
@@ -55,6 +80,24 @@ def schemes_page(request):
     else:
         messages.success(request, 'Please log in first')
         return redirect("home")
+
+def schemes_search(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            searched_for = request.POST.get('schemes_search')
+            if searched_for.isnumeric():
+                result_search = Scheme.objects.raw(f"SELECT * FROM website_scheme WHERE id = {searched_for}")
+                return render(request, 'schemes_search.html', {'result_search': result_search})
+            elif isinstance(searched_for, str):
+                searched_for = searched_for.lower()
+                result_search = Scheme.objects.raw(f"SELECT * FROM website_scheme WHERE name ='{searched_for}'")
+                return render(request, 'schemes_search.html', {'result_search': result_search})
+            else:
+                messages.success(request, 'Please enter a valid scheme id')
+                return redirect('schemes_page')
+    else:
+        messages.success(request, 'You must be logged in ')
+        return redirect('home')
 
 
 def state_page(request):
@@ -73,6 +116,21 @@ def college_page(request):
     else:
         messages.success(request, 'Please log in first')
         return redirect("home")
+
+
+def add_college(request):
+    form = AddCollegeForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'College Added')
+                return redirect('college_page')
+        return render(request, 'add_college.html', {'form': form})
+    else:
+        messages.success(request, 'You must be loggedin')
+        return redirect('home')
+
 
 
 def add_scheme(request):
@@ -101,3 +159,17 @@ def add_course(request):
     else:
         messages.success(request, 'You must be loggedin')
         return redirect('home')
+
+
+def search_student(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            searched_for = request.POST.get('student_search')
+            return  render(request, 'search_student.html', {'searched_for': searched_for})
+        else:
+            return render(request, 'search_student',{})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
+
+

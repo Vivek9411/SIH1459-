@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {%  if searched_for %}
+        you searched for
+{#    {% for search in searched_for %}#}
+        <h1>{{ searched_for }}</h1>
+{#        {% endfor %}#}
+
+    {%  else %}
+        <h1>you  searched for nothing  </h1>
+    {% endif %}
+<a href = "{% url 'student_page' %} " class ="btn btn-dark " >Go Back</a>
+
+{% endblock %}
