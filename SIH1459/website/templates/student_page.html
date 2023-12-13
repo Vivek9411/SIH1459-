@@ -2,7 +2,12 @@
 {% block content %}
     <div class="col-ms-6 mx-auto "  style="text-align: center;">
         <h1> Records of students</h1>
+    <form class="d-flex" method="POST" action="{% url 'search_student' %}">
+        {% csrf_token %}
 
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="student_search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     <a href = "{% url 'home' %} " class ="btn btn-dark " >Go Back</a>
     </div>
 

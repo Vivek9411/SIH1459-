@@ -16,7 +16,7 @@ class State(models.Model):
 
 
 class College(models.Model):
-    name = models.CharField('College Name',max_length=100)
+    name = models.CharField('College Name', max_length=100)
     code = models.CharField('College Code', primary_key=True, max_length=5)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     city = models.CharField('College City',max_length=100)
@@ -51,7 +51,7 @@ class Course(models.Model):
 
 class Scheme(models.Model):
     name = models.CharField('Scheme Name', null=False, blank=False,max_length=100)
-    id = models.CharField('Scheme Id', primary_key=True,max_length=2)
+    id = models.CharField('Scheme Id', primary_key=True, max_length=2)
     created_at = models.DateTimeField('Scheme Creation Date', auto_now_add=True)
 
     class Meta:
