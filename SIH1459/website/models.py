@@ -18,7 +18,7 @@ class State(models.Model):
 class College(models.Model):
     name = models.CharField('College Name', max_length=100)
     code = models.CharField('College Code', primary_key=True, max_length=5)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, blank=False, null=False, on_delete=models.CASCADE)
     city = models.CharField('College City',max_length=100)
     pincode = models.CharField('College Pincode', max_length=6)
     address = models.CharField('College Address',max_length=200)
