@@ -102,7 +102,7 @@ class AddStudentForm(forms.ModelForm):
                                    attrs={'placeholder': 'Aadhar ID ', 'class': 'form-control'}),
                                label='')
 
-    scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), required=True,label='Scheme')
+    scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), required=False,label='Scheme', blank=True)
 
     class Meta:
         model = Student

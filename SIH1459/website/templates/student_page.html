@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="col-ms-6 mx-auto "  style="text-align: center;">
-        <h1> Records of students</h1>
-    <form method="POST" action="{% url 'student_page' %}">
+    <form class="d-flex" method="POST" action="{% url 'student_search' %}">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-primary">Search student</button>
-    </form>
-        </div>
-<a href = "{% url 'add_student' %} " class ="btn btn-primary " >Add Student</a>
-<a href="{%  url 'home' %}" class="btn btn-primary">Back</a>
+        <label for="search_by">Search by</label>
+        <select name="search_by" id="search_by">
 
+          <option value="students_uid">UID</option>
+          <option value="students_aadhar">Aadhar id</option>
+        </select>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="student_search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+
+      </form>
+
+     <a href = "{% url 'add_student' %} " class ="btn btn-primary mt-2" >Add Student</a>
+    <a href="{%  url 'home' %}" class="btn btn-primary mt-2">Back</a>
 {%  endblock %}
