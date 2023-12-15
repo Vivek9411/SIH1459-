@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import State, Scheme, Course, College
+from .models import State, Scheme, Course, College, Student
 from .forms import AddSchemeForm, AddCourseForm, AddCollegeForm, AddStudentForm, SearchStudentForm
 
 
@@ -196,13 +196,47 @@ def add_course(request):
 #         messages.success(request, 'You must be logged in')
 #         return redirect('home')
 
-def student_page(request):
-    form = SearchStudentForm(request.POST or None)
+# def student_page(request):
+#     form = SearchStudentForm(request.POST or None)
+#     if request.user.is_authenticated:
+#         if request.method == 'POST':
+#             if form.is_valid():
+#                 return render(request, 'student_search.html', {'form': form})
+#         return render(request, 'student_page.html', {'form': form})
+#     else:
+#         messages.success(request, 'You must be logged in')
+#         return redirect('home')
+
+def student_search(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            if form.is_valid():
-                return render(request, 'student_search.html', {'form': form})
-        return render(request, 'student_page.html', {'form': form})
+            search_by = request.POST.get('search_by')
+            students_search = request.POST.get('student_search')
+            if students_search:
+                if search_by == 'students_aadhar':
+                    result_search = Student.objects.filter(aadhar_id__icontains=students_search)
+                    return render(request, 'student_search.html', {'result_search': result_search})
+                elif search_by == 'students_uid':
+                    # result_search = Course.objects.raw(f"SELECT * FROM website_course WHERE name ='{searched_for}' ")
+                    result_search = Student.objects.filter(uid__icontains=students_search)
+                    return render(request, 'student_search.html', {'result_search': result_search})
+                else:
+                    messages.success(request, 'Please enter a valid id')
+                    return redirect('student_page')
+            else:
+                messages.success(request, 'Please enter a valid  id')
+                return redirect('student_page')
+        else:
+            return render(request, 'student_page.html', {})
     else:
-        messages.success(request, 'You must be logged in')
+        messages.success(request, 'You must be logged in ')
+        return redirect('home')
+
+
+
+def student_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'student_page.html', {})
+    else:
+        messages.success(request, 'You must be logged in ')
         return redirect('home')
