@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<form class="d-flex" method="POST" action="{% url 'query_result' %}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="text" placeholder="type your query here" aria-label="Search" name="query_search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}

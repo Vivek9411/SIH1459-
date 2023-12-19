@@ -3,7 +3,7 @@
 {% block content %}
     <div class="col-ms-6 mx-auto "  style="text-align: center;">
     {% if user.is_authenticated %}
-    <h1 class="text-center">State</h1>
+    <h1>State</h1>
         </div>
     {% if state_records %}
 
@@ -12,6 +12,7 @@
             <tr>
                 <th scope="col">State Code</th>
                 <th scope="col">State Name</th>
+                <th scope ='col'>List Colleges</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -19,6 +20,7 @@
             <tr>
                 <td>{{record.name}}</td>
                 <td>{{record.code}}</td>
+                <td><a href="{% url 'state_college' record.code %}" class="btn btn-sm btn-secondary">List Colleges</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -33,6 +35,6 @@
 
     {% endif %}
 
-    <a href = "{% url 'home' %} " class ="btn btn-primary " >Go Back</a>
+    <a href = "{% url 'home' %} " class ="btn btn-dark btn1 " ><i class="bi bi-arrow-left-circle"></i> Back</a>
     </div>
 {% endblock %}

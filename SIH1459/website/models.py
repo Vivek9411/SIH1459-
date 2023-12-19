@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.conf import settings
+from django import forms
 
 # Create your models here.
 class State(models.Model):
@@ -73,7 +74,7 @@ class Student(models.Model):
     college = models.ForeignKey(College, on_delete=models.CASCADE)
     created_at = models.DateTimeField('Student Creation Date', auto_now_add=True)
     aadhar_id = models.CharField('Aadhar ID', max_length=12)
-    scheme = models.ForeignKey(Scheme, on_delete=models.SET_NULL, null=True)
+    scheme = models.ForeignKey(Scheme, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         indexes = [
