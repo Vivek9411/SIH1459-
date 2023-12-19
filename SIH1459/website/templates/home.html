@@ -1,18 +1,39 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
     {% if user.is_authenticated %}
-        <div class="col-ms-6 mx-auto "  style="text-align: center;">
-        <h1>this is dashboard </h1>
-        <a href="{% url 'student_page'%}" class ="btn btn-dark" >student records</a>
-        <a href="{% url 'courses_page'%}" class ="btn btn-dark" >Courses</a>
-        <a href="{% url 'schemes_page'%}" class ="btn btn-dark" >Schemes</a>
-        <a href="{% url 'state_page'%}"  class ="btn btn-dark">states </a>
-        <a href="{% url 'college_page'%}" class ="btn btn-dark" >colleges</a>
+        <div class="shadow col-ms-6 mx-auto "  style="text-align: center;">
+            <h1>Dashboard </h1></div>
+        <div class="col-ms-6 mx-auto home_page d-flex justify-content-evenly">
+        <a href="{% url 'student_page'%}" class ="btn btn-dark flex_1" ><i class="bi bi-people " style="font-size: 200%"></i><br/>student records</a>
+        <a href="{% url 'courses_page'%}" class ="btn btn-dark flex_1" ><i class="bi bi-mortarboard" style="font-size: 200%"></i><br/>Courses</a>
+        <a href="{% url 'schemes_page'%}" class ="btn btn-dark flex_1" ><i class="bi bi-journal-text" style="font-size: 200%"></i><br/>Schemes</a>
+        <a href="{% url 'state_page'%}"  class ="btn btn-dark flex_1"><i class="bi bi-geo-alt" style="font-size: 200%"></i><br/>states </a>
+        <a href="{% url 'college_page'%}" class ="btn btn-dark flex_1" ><i class="bi bi-buildings" style="font-size: 200%"></i><br/>colleges</a>
         </div>
 
-
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static '/ajadiKaAmrit.jpg' %}" class="d-block w-100 " style="height: 350px; margin-top: 40px" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '/swachBhart.jpg'%}" class="d-block w-100 " style="height: 350px; margin-top: 40px" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '/g20digitalindia.png'%}" class="d-block w-100" style="height: 350px; margin-top: 40px" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
     {% else %}
 
@@ -29,7 +50,7 @@
         </div>
         <br>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-dark">Login</button>
         </div>
     </form>
 

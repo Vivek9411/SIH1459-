@@ -4,7 +4,19 @@
 
     <div class="col-ms-6 mx-auto "  style="text-align: center;">
     {% if user.is_authenticated %}
-    <h1 class="text-center">Scheme</h1>
+        <h1 class="text-center">Scheme</h1>
+         <form class="d-flex" method="POST" action="{% url 'schemes_search' %}">
+        {% csrf_token %}
+        <label for="search_by">Search by</label>
+        <select name="search_by" id="search_by">
+
+          <option value="scheme_name">Scheme Name</option>
+          <option value="scheme_id">Scheme ID</option>
+        </select>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="scheme_search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
         </div>
     {% if scheme_records %}
 
@@ -36,16 +48,6 @@
     <a href = "{% url 'add_scheme' %} " class ="btn btn-primary " >Add Scheme</a>
     </div>
 
-    <form class="d-flex" method="POST" action="{% url 'schemes_search' %}">
-        {% csrf_token %}
-        <label for="search_by">Search by</label>
-        <select name="search_by" id="search_by">
 
-          <option value="scheme_name">Scheme Name</option>
-          <option value="scheme_id">Scheme ID</option>
-        </select>
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="scheme_search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
 
 {% endblock %}

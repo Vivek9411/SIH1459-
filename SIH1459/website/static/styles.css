@@ -1,0 +1,31 @@
+.log{
+    position: absolute; top: 8px; right:10px;
+}
+
+.logo{
+    height: auto; width: 40px;
+}
+.shadow {
+    background: linear-gradient(to bottom right, orange,white,green);
+    padding: 1px;
+    border-radius: 20px;
+}
+.btn_new{
+    margin-top: 100px;
+}
+.home_page{
+    margin-top: 72px !important;
+
+}
+
+.flex_1
+{
+    width: 15%;
+}
+.btn1{
+    margin: 10px;
+}
+.log_icon{
+    font-size:20px;
+    padding: 4px;
+}
